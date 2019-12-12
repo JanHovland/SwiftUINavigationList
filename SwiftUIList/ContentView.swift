@@ -37,11 +37,31 @@ struct ContentView: View {
         List {
             ForEach(restaurants) { restaurant in
                 BasicImageRow(restaurant: restaurant)
+                    .contextMenu {
+                        Button(action: {
+                            // delete the selected restasurant
+                        }) {
+                            HStack {
+                                Text("Delete")
+                                Image(systemName: "trash")
+                            }
+                        }
+                        Button(action: {
+                            // mark the selelcted restaurant as favorite
+                        }) {
+                            HStack {
+                                Text("Favorite")
+                                Image(systemName: "star")
+                            }
+                        }
+                }
             }
             .onDelete { (indexSet) in 
                 self.restaurants.remove(atOffsets: indexSet)
             }
         }
+
+
     }
 }
 
