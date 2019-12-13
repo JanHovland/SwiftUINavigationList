@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State private var showActionSheet = false
+    // @State private var showActionSheet = false
     @State private var selectedRestaurant: Restaurant?
     
     @State var restaurants = [ Restaurant(name: "Cafe Deadend", image: "cafedeadend"),
@@ -59,6 +59,29 @@ struct ContentView: View {
                                 Image(systemName: "star")
                             }
                         }
+                    }
+                .onTapGesture {
+                    // self.showActionSheet.toggle()
+                    self.selectedRestaurant = restaurant
+                }
+                // Using showActionSheet:
+                // .actionSheet(isPresented: self.$showActionSheet) {
+                // Using $selectedRestaurant:
+                .actionSheet(item: self.$selectedRestaurant) { _ in
+                    ActionSheet(title: Text("What do you want to do"), message: nil, buttons: [
+                        .default(Text("Mark as Favorite"), action: {
+                            if let selectedRestaurant = self.selectedRestaurant {
+                                self.setFavorite(item: selectedRestaurant) }
+                        }),
+
+                        .destructive(Text("Delete"), action: {
+                            if let selectedRestaurant = self.selectedRestaurant {
+                                self.delete(item: selectedRestaurant) }
+                        }),
+
+                        .cancel()
+
+                    ])
                 }
             }
             .onDelete { (indexSet) in 
