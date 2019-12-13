@@ -10,7 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
 
-    
+    @State private var showActionSheet = false
+    @State private var selectedRestaurant: Restaurant?
     
     @State var restaurants = [ Restaurant(name: "Cafe Deadend", image: "cafedeadend"),
                                Restaurant(name: "Homei", image: "homei"),
